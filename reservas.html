@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Reserva</title>
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/inicio.css">
+        <link rel="stylesheet" href="css/formulario.css">
+    </head>
+    <body>
+        <header class="header">
+            <div class="header__logo">
+                <a href="index.html"><img src="img/logo.png" alt="Logo"></a>
+            </div>
+            <nav class="header__nav">
+                <ul>
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="nosotros.html">Nosotros</a></li>
+                    <li><a href="#ubicacion">Ubicación</a></li>
+                    <li><a href="#menu">Menú</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                    <li><a href="reservas.html">Reservas</a></li>
+                </ul>
+            </nav>
+        </header>
+        <main class="main">
+            <h1>Reserva tu mesa</h1>
+
+            <form action="" method="post" class="main__form">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" required>
+
+                <label for="apellidos">Apellidos:</label>
+                <input type="text" id="apellidos" name="apellidos" required>
+
+                <label for="telefono">Número de Teléfono:</label>
+                <input type="tel" id="telefono" name="telefono"
+                    pattern="[0-9]{9,}" placeholder="Ej. 123456789" required>
+
+                <label for="fecha">Fecha:</label>
+                <input type="date" id="fecha" name="fecha" required>
+
+                <label for="hora">Hora:</label>
+                <input type="time" id="hora" name="hora" required>
+
+                <label for="email">Correo Electrónico:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="comensales">Comensales</label>
+                <select>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="+">+</option>
+                </select>
+                <button type="submit">RESERVAR</button>
+            </form>
+        </main>
+        <footer class="footer">
+            <div class="footer__location">
+                <figure>
+                    <img src="/img/icons8-marcador-100.png" alt>
+                    <figcaption>Calle Mi Restaurante nº33</figcaption>
+                </figure>
+            </div>
+            <div class="footer__mail">
+                <figure>
+                    <img src="img/icons8-gmail-100.png" alt>
+                    <figcaption>direccion@tresestrellas.com</figcaption>
+                </figure></div>
+            <div class="footer__tlfn">
+                <figure>
+                    <img src="img/icons8-teléfono-100.png" alt>
+                    <figcaption>+34 945 22 33 44</figcaption>
+                </figure></div>
+
+            <div class="footer__social">
+                <a href="#" target="_blank" title="Facebook"><img
+                        src="img/icons8-facebook-60.png" alt="Facebook"></a>
+                <a href="#" target="_blank" title="Twitter"><img
+                        src="img/icons8-twitter-60.png" alt="Twitter"></a>
+                <a href="#" target="_blank" title="Instagram"><img
+                        src="img/icons8-instagram-60.png" alt="Instagram"></a>
+            </div>
+        </footer>
+    </body>
+</html>
