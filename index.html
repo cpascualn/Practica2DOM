@@ -1,139 +1,104 @@
 <!DOCTYPE html>
 <html lang="es">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Inicio</title>
-        <link rel="stylesheet" href="css/normalize.css">
-        <link rel="stylesheet" href="css/inicio.css">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
-    </head>
-    <body>
-        <header class="header">
-            <div class="header__logo">
-                <a href="#inicio"><img src="img/logo.png" alt="Logo"></a>
-            </div>
-            <nav class="header__nav">
-                <ul>
-                    <li><a href="index.html">Inicio</a></li>
-                    <li><a href="nosotros.html">Nosotros</a></li>
-                    <li><a href="#ubicacion">Ubicación</a></li>
-                    <li><a href="#menu">Menú</a></li>
-                    <li><a href="#contacto">Contacto</a></li>
-                    <li><a href="reservas.html">Reservas</a></li>
-                </ul>
-            </nav>
-        </header>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio</title>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/inicio.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
-        <main class="main">
-            <div class="main__slider">
-                <ul class="slider">
-                    <li id="slide1">
-                        <img src="img/exterior.jpg" />
-                    </li>
-                    <li id="slide2">
-                        <img src="img/interior.png" />
-                    </li>
-                    <li id="slide3">
-                        <img src="img/comida.jpg" />
-                    </li>
-                </ul>
+</head>
 
-                <ul class="menu">
-                    <li>
-                        <a href="#slide1">1</a>
-                    </li>
-                    <li>
-                        <a href="#slide2">2</a>
-                    </li>
-                    <li>
-                        <a href="#slide3">3</a>
-                    </li>
-                </ul>
-            </div>
+<body>
+    <header class="header">
+        <div class="header__logo">
+            <a href="#inicio"><img src="img/logo.png" alt="Logo"></a>
+        </div>
+        <nav class="header__nav">
+            <ul class="menuu">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="#alergeno">Alergenos</a></li>
+                <li><a href="#menu">Menus</a></li>
+                <li>
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Restaurantes
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-dark">
+                            <li><a class="dropdown-item active" href="#">Restaurante1</a></li>
+                            <li><a class="dropdown-item" href="#">Restaurante2</a></li>
+                            <li><a class="dropdown-item" href="#">Restaurante3</a></li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
 
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                  <li class="breadcrumb-item active" aria-current="page">Home</li>
-                </ol>
-              </nav>
-<!--               
-              <nav aria-label="breadcrumb">
+    <main class="main">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item active" aria-current="page">Home</li>
+            </ol>
+        </nav>
+
+        <!-- <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                   <li class="breadcrumb-item"><a href="#">Home</a></li>
                   <li class="breadcrumb-item active" aria-current="page">Library</li>
                 </ol>
-              </nav> -->
-            <h1 class="main__ini">INICIO</h1>
-            <div class="main__container">
-                <div class="container__img"><img src="img/comida (1).jpg"
-                        alt="platos1"></div>
-                <div class="container__txt"> Bienvenido a nuestro rincón
-                    culinario, donde cada plato cuenta una historia de sabores
-                    vibrantes y frescos.
-                    <br>
-                    Desde nuestras ensaladas crujientes
-                    hasta nuestros suculentos cortes de carne y pescado fresco,
-                    cada bocado es una experiencia única.
-                    <br><br>
-                    Nuestro chef fusiona la tradición con la innovación para
-                    ofrecerte una carta que despierta los sentidos. Descubre el
-                    arte de la gastronomía en cada plato y deja que nuestros
-                    sabores te transporten a un viaje inolvidable.
+              </nav>  -->
+        <h1 class="main__ini">INICIO</h1>
+
+        <div class="listado" id="listad">
+
+            <div class="card" style="width: 18rem;">
+                <img src="img/comida (1).jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                        card's content.</p>
                 </div>
-                <div class="container__img"><img src="img/comida (2).jpg"
-                        alt="platos1"></div>
-                <div class="container__txt"> Adentrándote en nuestro
-                    restaurante, serás recibido por un espacio cuidadosamente
-                    decorado que combina la calidez de la madera con toques de
-                    modernidad. Nuestro acogedor comedor principal es perfecto
-                    para cenas íntimas, celebraciones especiales o simplemente
-                    para disfrutar de una deliciosa comida.</div>
-                <div class="container__img"><img src="img/restaurant.jpg"
-                        alt="platos1"></div>
-                <div class="container__txt">Nuestro bar, con su elegante diseño,
-                    es el lugar ideal para disfrutar de cócteles artesanales
-                    antes de la cena o para relajarte después de una comida
-                    memorable. Las luces tenues y la música suave crean el
-                    ambiente perfecto para una velada inolvidable.</div>
             </div>
+        </div>
+    </main>
 
+    <footer class="footer">
+        <div class="footer__location">
+            <figure>
+                <img src="/img/icons8-marcador-100.png" alt>
+                <figcaption>Calle Mi Restaurante nº33</figcaption>
+            </figure>
+        </div>
+        <div class="footer__mail">
+            <figure>
+                <img src="img/icons8-gmail-100.png" alt>
+                <figcaption>direccion@tresestrellas.com</figcaption>
+            </figure>
+        </div>
+        <div class="footer__tlfn">
+            <figure>
+                <img src="img/icons8-teléfono-100.png" alt>
+                <figcaption>+34 945 22 33 44</figcaption>
+            </figure>
+        </div>
 
-              
-        </main>
-
-        <footer class="footer">
-            <div class="footer__location">
-                <figure>
-                    <img src="/img/icons8-marcador-100.png" alt>
-                    <figcaption>Calle Mi Restaurante nº33</figcaption>
-                </figure>
-            </div>
-            <div class="footer__mail">
-                <figure>
-                    <img src="img/icons8-gmail-100.png" alt>
-                    <figcaption>direccion@tresestrellas.com</figcaption>
-                </figure></div>
-            <div class="footer__tlfn">
-                <figure>
-                    <img src="img/icons8-teléfono-100.png" alt>
-                    <figcaption>+34 945 22 33 44</figcaption>
-                </figure></div>
-
-            <div class="footer__social">
-                <a href="#" target="_blank" title="Facebook"><img
-                        src="img/icons8-facebook-60.png" alt="Facebook"></a>
-                <a href="#" target="_blank" title="Twitter"><img
-                        src="img/icons8-twitter-60.png" alt="Twitter"></a>
-                <a href="#" target="_blank" title="Instagram"><img
-                        src="img/icons8-instagram-60.png" alt="Instagram"></a>
-            </div>
-        </footer>
+        <div class="footer__social">
+            <a href="#" target="_blank" title="Facebook"><img src="img/icons8-facebook-60.png" alt="Facebook"></a>
+            <a href="#" target="_blank" title="Twitter"><img src="img/icons8-twitter-60.png" alt="Twitter"></a>
+            <a href="#" target="_blank" title="Instagram"><img src="img/icons8-instagram-60.png" alt="Instagram"></a>
+        </div>
+    </footer>
 
 
 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+    <script src=""></script>
+</body>
 
-    </body>
 </html>

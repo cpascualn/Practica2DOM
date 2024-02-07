@@ -21,7 +21,7 @@ body {
 }
 
 
-.header__nav ul {
+.header__nav .menuu {
     list-style: none;
     display: flex;
     margin: 0;
@@ -29,7 +29,7 @@ body {
     justify-content: space-around;
 }
 
-.header__nav li {
+.header__nav  li {
     margin-right: 30px;
 }
 
@@ -55,12 +55,7 @@ body {
     margin-bottom: 25px;
 }
 
-ul,
-li {
-    padding: 0;
-    margin: 0;
-    list-style: none;
-}
+
 
 ul.slider {
     position: relative;
@@ -143,6 +138,20 @@ ul.slider li:target {
     text-align: center;
 }
 
+
+.listado {
+    border: 1px solid black;
+    width: 80%;
+    height: auto;
+    padding: 20px;
+    display: grid;
+    column-gap: 5%;
+    row-gap: 15px;
+    grid-template-columns: repeat(4, 20%);
+    justify-content: center;
+    justify-items: center;
+    margin-bottom: 50px;
+}
 
 .footer {
     grid-area: footer;
