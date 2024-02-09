@@ -7,15 +7,14 @@ class RestaurantController {
         this[MODEL] = modelRestaurant;
         this[VIEW] = viewRestaurant;
         // Eventos iniciales del Controlador
-        this.onInit();
         this.onLoad();
-
+        this.onInit();
         // Enlazamos handlers con la vista
-        // this[VIEW].bindInit(this.handleInit);
+        this[VIEW].bindInit(this.handleInit);
     }
 
     onInit = () => {
-        // this[VIEW].init();
+        this[VIEW].bindCategoryList(this.handleCategoryList);
     };
 
     handleInit = () => {
@@ -25,22 +24,22 @@ class RestaurantController {
     onLoad = () => {
 
         let cat1 = this[MODEL].createCategory('Carne', 'disfrute de nuestras carnes');
-        let dish11 = this[MODEL].createDish('Chuleton Cordero', 'Chuleton de Cordero con patatas cocidas en salsa de tomate ', ['cordero', 'tomate', 'patata cocida'], 'image');
-        let dish12 = this[MODEL].createDish('Albondigas', 'Albondigas con tomate y patatas fritas', ['carne cerdo', 'tomate', 'patata frita'], 'image');
-        let dish13 = this[MODEL].createDish('Bistec', 'carne de res con patatas', ['carne de res', 'patatas fritas'], 'image');
-        let dish14 = this[MODEL].createDish('CheeseBurguer', 'hamburguesa de vacuno con queso', ['carne de vacuno', 'queso cheddar', 'lechuga', 'bacon', 'pan hamburguesa'], 'image');
+        let dish11 = this[MODEL].createDish('Chuleton Cordero', 'Chuleton de Cordero con patatas cocidas en salsa de tomate ', ['cordero', 'tomate', 'patata cocida'], 'img/Platos/cordero.jpg');
+        let dish12 = this[MODEL].createDish('Albondigas', 'Albondigas con tomate y patatas fritas', ['carne cerdo', 'tomate', 'patata frita'], 'img/Platos/albondigas.jpg');
+        let dish13 = this[MODEL].createDish('Bistec', 'carne de res con patatas', ['carne de res', 'patatas fritas'], 'img/Platos/bistec.jpg');
+        let dish14 = this[MODEL].createDish('CheeseBurguer', 'hamburguesa de vacuno con queso', ['carne de vacuno', 'queso cheddar', 'lechuga', 'bacon', 'pan hamburguesa'], 'img/Platos/cheeseburguer.jpg');
 
         let cat2 = this[MODEL].createCategory('Pasta', 'la mejor pasta');
-        let dish21 = this[MODEL].createDish('Pesto', 'pasta al pesto', ['pasta', 'queso', 'salsa pesto'], 'image');
-        let dish22 = this[MODEL].createDish('Bolognesa', 'pasta con carne picada y tomate', ['pasta', 'queso', 'carne de vacuno', 'tomate'], 'image');
-        let dish23 = this[MODEL].createDish('Carbonara', 'pasta carbonara con nata y bacon', ['pasta', 'queso', 'bacon', 'salsa carbonara'], 'image');
-        let dish24 = this[MODEL].createDish('Tomate Con Bacon', 'pasta con tomate y bacon', ['pasta', 'queso', 'bacon', 'tomate'], 'image');
+        let dish21 = this[MODEL].createDish('Pesto', 'pasta al pesto', ['pasta', 'queso', 'salsa pesto'], 'img/Platos/pesto.jpg');
+        let dish22 = this[MODEL].createDish('Bolognesa', 'pasta con carne picada y tomate', ['pasta', 'queso', 'carne de vacuno', 'tomate'], 'img/Platos/bolognesa.jpg');
+        let dish23 = this[MODEL].createDish('Carbonara', 'pasta carbonara con nata y bacon', ['pasta', 'queso', 'bacon', 'salsa carbonara'], 'img/Platos/carbonara.jpg');
+        let dish24 = this[MODEL].createDish('Tomate Con Bacon', 'pasta con tomate y bacon', ['pasta', 'queso', 'bacon', 'tomate'], 'img/Platos/bacontomate.jpg');
 
         let cat3 = this[MODEL].createCategory('Postres', 'deleite su paladar');
-        let dish31 = this[MODEL].createDish('Coulant de chocolate', 'coulant', ['chocolate', 'harina', 'huevo'], 'image');
-        let dish32 = this[MODEL].createDish('Bola de helado', 'bola de helado sabores a elegir', ['leche', 'chocolate', 'vainilla', 'fresa'], 'image');
-        let dish33 = this[MODEL].createDish('Flan de huevo', 'flan', ['leche', 'huevo'], 'image');
-        let dish34 = this[MODEL].createDish('Tarta de queso', 'tarta queso', ['queso', 'tarta'], 'image');
+        let dish31 = this[MODEL].createDish('Coulant de chocolate', 'coulant', ['chocolate', 'harina', 'huevo'], 'img/Platos/coulant.jpg');
+        let dish32 = this[MODEL].createDish('Bola de helado', 'bola de helado sabores a elegir', ['leche', 'chocolate', 'vainilla', 'fresa'], 'img/Platos/bolashelado.jpg');
+        let dish33 = this[MODEL].createDish('Flan de huevo', 'flan', ['leche', 'huevo'], 'img/Platos/flan.jpg');
+        let dish34 = this[MODEL].createDish('Tarta de queso', 'tarta queso', ['queso', 'tarta'], 'img/Platos/tarta.jpg');
 
         let al1 = this[MODEL].createAllergen('gluten', 'Proteína encontrada en trigo, cebada y centeno.');
         let al2 = this[MODEL].createAllergen('cacahuetes', 'Leguminosa que puede causar alergias graves.');
@@ -84,10 +83,34 @@ class RestaurantController {
 
 
         for (let index = 0; index < 3; index++) {
-            let rand = Math.floor(Math.random() * dishes.length - 1);
-            randDishes.push(dishes[rand]);
+            let rand = Math.floor(Math.random() * dishes.length);
+            // si el plato ya existe en el array de aleatorios, no se añade  y se resta uno al indice para seguir teniendo 3 platos
+            if (randDishes.find(dish => dish.name === dishes[rand].name) === undefined) {
+                randDishes.push(dishes[rand]);
+            } else {
+                index--;
+            }
+
         }
         return randDishes;
+    }
+
+    handleCategoryList = (catName) => {
+        let category;
+        console.log(catName);
+        let categories = this[MODEL].categories;
+
+        for (const cat of categories) {
+            if (cat.name === catName) {
+                category = cat;
+            }
+        }
+        let dishes = this[MODEL].getDishesInCategory(category);
+        let dishs = Array();
+        for (const dish of dishes) {
+            dishs.push(dish.dish);
+        }
+        this[VIEW].showDishes(dishs);
     }
 
 }
