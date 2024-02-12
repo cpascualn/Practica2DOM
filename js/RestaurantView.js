@@ -160,7 +160,7 @@ class RestaurantView {
 		container.classList.add('nav');
 		container.classList.add('nav-underline');
 		for (const allergen of allergens) {
-			container.insertAdjacentHTML('beforeend', `<div class="col-lg-3 colmd-6 nav-item"><a data-allergen="${allergen.name}" href="#${allergen.name}" class="nav-link">
+			container.insertAdjacentHTML('beforeend', `<div class="col-md-4  nav-item"><a data-allergen="${allergen.name}" href="#${allergen.name}" class="nav-link">
 			<h4>${allergen.name}</h4>
 			</a>
 			</div>`);
@@ -184,7 +184,7 @@ class RestaurantView {
 		container.classList.add('nav');
 		container.classList.add('nav-underline');
 		for (const menu of menus) {
-			container.insertAdjacentHTML('beforeend', `<div class="col-lg-3 colmd-6 nav-item"><a data-menu="${menu.name}" href="#${menu.name}" class="nav-link">
+			container.insertAdjacentHTML('beforeend', `<div class="col-lg-3 col-md-3 nav-item"><a data-menu="${menu.name}" href="#${menu.name}" class="nav-link">
 			<h4>${menu.name}</h4>
 			</a>
 			</div>`);
