@@ -11,10 +11,15 @@ class RestaurantController {
         this.onInit();
         // Enlazamos handlers con la vista
         this[VIEW].bindInit(this.handleInit);
+        this[VIEW].bindAllerList(this.handleAllergenList);
+        this[VIEW].bindMenuList(this.handleMenuList);
     }
 
-    onInit = () => {
+    onInit = () => { // cada vez que se pulsa el boton de inicio se muestran de nuevo las categorias , 3 platos rand y se reinicia el breadcrumb
+        this[VIEW].showCategories(this[MODEL].categories);
+        this[VIEW].showDishes(this.RandDishes());
         this[VIEW].bindCategoryList(this.handleCategoryList);
+        this[VIEW].modifyBreadcrumb(null);
     };
 
     handleInit = () => {
@@ -97,7 +102,6 @@ class RestaurantController {
 
     handleCategoryList = (catName) => {
         let category;
-        console.log(catName);
         let categories = this[MODEL].categories;
 
         for (const cat of categories) {
@@ -106,6 +110,62 @@ class RestaurantController {
             }
         }
         let dishes = this[MODEL].getDishesInCategory(category);
+        let dishs = Array();
+        for (const dish of dishes) {
+            dishs.push(dish.dish);
+        }
+        this[VIEW].showDishes(dishs);
+    }
+
+    handleAllergenList = () => {
+        this[VIEW].showAllergens(this[MODEL].allergens);
+        this[VIEW].bindAllergen(this.handleAllergenDishes);
+        this[VIEW].modifyBreadcrumb(null);
+    }
+
+    handleAllergenDishes = (allergenName) => {
+
+        let allergen;
+        let allergens = this[MODEL].allergens;
+
+        for (const al of allergens) {
+            if (al.name === allergenName) {
+                allergen = al;
+            }
+        }
+        let dishes = this[MODEL].getDishesWithAllergen(allergen);
+        let dishs = Array();
+        for (const dish of dishes) {
+            dishs.push(dish.dish);
+        }
+        this[VIEW].showDishes(dishs);
+    }
+
+
+    handleMenuList = () => {
+        let menus = Array();
+        for (const menu of this[MODEL].menus) {
+            menus.push(menu.menu);
+        }
+        this[VIEW].showMenus(menus);
+        this[VIEW].bindMenu(this.handleMenuDishes);
+        this[VIEW].modifyBreadcrumb(null);
+    }
+
+
+    handleMenuDishes = (menuName) => {
+        //  cambiar
+        let menu;
+        let menus = this[MODEL].menus;
+
+
+        for (const men of menus) {
+            if (men.menu.name === menuName) {
+                menu = men;
+            }
+        }
+        let dishes = menu.dishes;
+        console.log(dishes);
         let dishs = Array();
         for (const dish of dishes) {
             dishs.push(dish.dish);
