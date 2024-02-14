@@ -13,6 +13,7 @@ class RestaurantController {
         this[VIEW].bindInit(this.handleInit);
         this[VIEW].bindAllerList(this.handleAllergenList);
         this[VIEW].bindMenuList(this.handleMenuList);
+        this[VIEW].bindRestaurant(this.handleRestaurants);
     }
 
     onInit = () => { // cada vez que se pulsa el boton de inicio se muestran de nuevo las categorias , 3 platos rand y se reinicia el breadcrumb
@@ -22,11 +23,11 @@ class RestaurantController {
         this[VIEW].modifyBreadcrumb(null);
     };
 
-    handleInit = () => {
+    handleInit = () => { // cuando se pulsa inicio se llama a oninit
         this.onInit();
     }
 
-    onLoad = () => {
+    onLoad = () => { // cargar los objetos
 
         let cat1 = this[MODEL].createCategory('Carne', 'disfrute de nuestras carnes');
         let dish11 = this[MODEL].createDish('Chuleton Cordero', 'Chuleton de Cordero con patatas cocidas en salsa de tomate ', ['cordero', 'tomate', 'patata cocida'], 'img/Platos/cordero.jpg');
@@ -55,9 +56,9 @@ class RestaurantController {
         let menu2 = this[MODEL].createMenu('menu2', 'bistec,carbonara,coulant');
         let menu3 = this[MODEL].createMenu('menu3', 'chuleton,bolognesa,tarta');
 
-        let rest1 = this[MODEL].createRestaurant('Restaurante de Madrid', 'descrip', new Coordinate(33, 66));
-        let rest2 = this[MODEL].createRestaurant('Restaurante de Barcelona', 'descrip2', new Coordinate(55, 110));
-        let rest3 = this[MODEL].createRestaurant('Restaurante de Sevilla', 'descrip3', new Coordinate(200, 100));
+        let rest1 = this[MODEL].createRestaurant('Restaurante de Madrid', 'Explora la riqueza de la cocina española en nuestro restaurante en el vibrante corazón de Madrid, donde cada plato es una celebración de los sabores y la cultura de España, ubicado en el bullicioso centro de la capital.', new Coordinate(33, 66));
+        let rest2 = this[MODEL].createRestaurant('Restaurante de Barcelona', 'Explora la riqueza de la cocina española en nuestro restaurante en el vibrante corazón de Barcelona, donde cada plato es una celebración de los sabores.', new Coordinate(55, 110));
+        let rest3 = this[MODEL].createRestaurant('Restaurante de Sevilla', 'Explora la riqueza de la cocina española en nuestro restaurante en el vibrante corazón de Sevilla, donde cada plato es una celebración de los sabores y la cultura de España, ubicado en el bullicioso centro de la capital Andaluza.', new Coordinate(200, 100));
 
 
         this[MODEL].assignAllergenToDish(al1, dish14, dish21, dish22, dish23, dish24, dish33);
@@ -74,18 +75,15 @@ class RestaurantController {
         this[MODEL].assignDishToMenu(menu3, dish11, dish22, dish34)
 
 
+        // mostrar el menu de categorias , 3 platos aleatorios y cargar el desplegable con los restaurantes
         this[VIEW].showCategories(this[MODEL].categories);
         this[VIEW].showDishes(this.RandDishes());
+        this[VIEW].loadRestaurants(this[MODEL].restaurants);
     };
 
-    RandDishes() {
+    RandDishes() {   // recoger los objetos dish en un array
         let randDishes = Array();
-        let dishes = Array();
-
-        for (const dish of this[MODEL].dishes) {
-            dishes.push(dish.dish)
-        }
-
+        let dishes = [...this[MODEL].dishes].map(dish => dish.dish);
 
         for (let index = 0; index < 3; index++) {
             let rand = Math.floor(Math.random() * dishes.length);
@@ -100,77 +98,42 @@ class RestaurantController {
         return randDishes;
     }
 
-    handleCategoryList = (catName) => {
-        let category;
-        let categories = this[MODEL].categories;
-
-        for (const cat of categories) {
-            if (cat.name === catName) {
-                category = cat;
-            }
-        }
-        let dishes = this[MODEL].getDishesInCategory(category);
-        let dishs = Array();
-        for (const dish of dishes) {
-            dishs.push(dish.dish);
-        }
-        this[VIEW].showDishes(dishs);
+    handleCategoryList = (catName) => { // manejar cuando se pulsa una categoria en el menu y mostrar sus platos
+        let category = [...this[MODEL].categories].find(cat => cat.name === catName);
+        let dishes = [...this[MODEL].getDishesInCategory(category)].map(dish => dish.dish);
+        this[VIEW].showDishes(dishes);
     }
 
-    handleAllergenList = () => {
+    handleAllergenList = () => {// manejar cuando se pulsa  alergenos en el menu para mostrar un nuevo menu con los alergenos disponibles
         this[VIEW].showAllergens(this[MODEL].allergens);
         this[VIEW].bindAllergen(this.handleAllergenDishes);
         this[VIEW].modifyBreadcrumb(null);
     }
 
-    handleAllergenDishes = (allergenName) => {
-
-        let allergen;
-        let allergens = this[MODEL].allergens;
-
-        for (const al of allergens) {
-            if (al.name === allergenName) {
-                allergen = al;
-            }
-        }
-        let dishes = this[MODEL].getDishesWithAllergen(allergen);
-        let dishs = Array();
-        for (const dish of dishes) {
-            dishs.push(dish.dish);
-        }
+    handleAllergenDishes = (allergenName) => { // manejar cuando se pulsa un alergeno del nuevo menu de alergenos generado  y mostrar sus platos
+        let allergen = [...this[MODEL].allergens].find(al => al.name === allergenName);
+        let dishs = [...this[MODEL].getDishesWithAllergen(allergen)].map(dish => dish.dish);
         this[VIEW].showDishes(dishs);
     }
 
 
-    handleMenuList = () => {
-        let menus = Array();
-        for (const menu of this[MODEL].menus) {
-            menus.push(menu.menu);
-        }
+    handleMenuList = () => { // manejar cuando se pulsa menus en el menu y mostrar un nuevo menu con los menus 
+        let menus = [...this[MODEL].menus].map(menu => menu.menu);
         this[VIEW].showMenus(menus);
         this[VIEW].bindMenu(this.handleMenuDishes);
         this[VIEW].modifyBreadcrumb(null);
     }
 
 
-    handleMenuDishes = (menuName) => {
-        //  cambiar
-        let menu;
-        let menus = this[MODEL].menus;
-
-
-        for (const men of menus) {
-            if (men.menu.name === menuName) {
-                menu = men;
-            }
-        }
-        let dishes = menu.dishes;
-        console.log(dishes);
-        let dishs = Array();
-        for (const dish of dishes) {
-            dishs.push(dish.dish);
-        }
+    handleMenuDishes = (menuName) => { // manejar cuando se pulsa un menu para mostrar sus platos
+        let menu = [...this[MODEL].menus].find(men => men.menu.name === menuName);
+        let dishs = menu.dishes.map(dish => dish.dish);
         this[VIEW].showDishes(dishs);
+    }
+
+    handleRestaurants = (restName) => { // mostrar restaurante pulsado en el menu
+        let restaurant = [...this[MODEL].restaurants].find(rest => rest.name.replace(/\s/g, '') === restName);
+        this[VIEW].showRestaurant(restaurant);
     }
 
 }
